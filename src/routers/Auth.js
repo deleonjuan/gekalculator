@@ -14,7 +14,7 @@ const AuthScreen = props => {
     useEffect(() => {
       setTimeout(() => {
         setIsLoading(false)
-      }, 100);
+      }, 200);
     }, []);
 
   return (
