@@ -9,6 +9,9 @@ import {
 } from 'react-native';
 import {BKGROUND, PRIMARY, SECONDARY, WHITE} from '../../../utils/theme';
 import CalcKeyboard from './CalcKeyboard';
+// redux
+import {useDispatch} from 'react-redux';
+import {AddToHistory} from '../../../store/calculator';
 
 const {width} = Dimensions.get('screen');
 const logo = require('../../../assets/images/logo.png');
@@ -21,6 +24,7 @@ const CalculatorScreen = props => {
   const [secondValue, setSecondValue] = useState('0');
   const [nextValue, setNextValue] = useState(false);
   const [isDotAllowed, setIsDotAllowed] = useState(true);
+  const dispatch = useDispatch();
 
   const setState = val => {
     if (val == 'Clear') {
@@ -64,51 +68,59 @@ const CalculatorScreen = props => {
 
       if (operator == '+') {
         result = parseFloat(firstValue) + parseFloat(secondValue);
-        props.AddToHistory({
-          type: 'suma',
-          res:
-            String(firstValue) +
-            operator +
-            String(secondValue) +
-            '=' +
-            String(result),
-        });
+        dispatch(
+          AddToHistory({
+            type: 'suma',
+            res:
+              String(firstValue) +
+              operator +
+              String(secondValue) +
+              '=' +
+              String(result),
+          }),
+        );
       }
       if (operator == 'X') {
         result = parseFloat(firstValue) * parseFloat(secondValue);
-        props.AddToHistory({
-          type: 'multiplicacion',
-          res:
-            String(firstValue) +
-            operator +
-            String(secondValue) +
-            '=' +
-            String(result),
-        });
+        dispatch(
+          AddToHistory({
+            type: 'multiplicacion',
+            res:
+              String(firstValue) +
+              operator +
+              String(secondValue) +
+              '=' +
+              String(result),
+          }),
+        );
       }
       if (operator == '/') {
         result = parseFloat(firstValue) / parseFloat(secondValue);
-        props.AddToHistory({
-          type: 'division',
-          res:
-            String(firstValue) +
-            operator +
-            String(secondValue) +
-            '=' +
-            String(result),
-        });
+        dispatch(
+          AddToHistory({
+            type: 'division',
+            res:
+              String(firstValue) +
+              operator +
+              String(secondValue) +
+              '=' +
+              String(result),
+          }),
+        );
       }
       if (operator == '-') {
         result = parseFloat(firstValue) - parseFloat(secondValue);
-        props.AddToHistory({
-          type: 'resta',
-          res:
-            String(firstValue) +
-            operator +
-            String(secondValue) +
-            '=' +
-            String(result),
-        });
+        dispatch(
+          AddToHistory({
+            type: 'resta',
+            res:
+              String(firstValue) +
+              operator +
+              String(secondValue) +
+              '=' +
+              String(result),
+          }),
+        );
       }
 
       setDisplayValue(String(result));

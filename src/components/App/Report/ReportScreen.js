@@ -2,6 +2,9 @@ import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Image, Pressable, FlatList} from 'react-native';
 import {BKGROUND, BKGROUND2, PRIMARY, SECONDARY, WHITE} from '../../../utils/theme';
 import ItemReport from './ItemReport';
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+import { logOut } from '../../../store/auth';
 
 const logo = require('../../../assets/images/logo.png');
 const calculator = require('../../../assets/images/calculator.png');
@@ -9,6 +12,9 @@ const back = require('../../../assets/images/back.png');
 
 const ReportScreen = props => {
   const {navigation} = props;
+  const historial = useSelector((state) => state.calculator.historial)
+  const dispatch = useDispatch()
+
   return (
     <>
       <View style={styles.header}>
@@ -19,7 +25,7 @@ const ReportScreen = props => {
               justifyContent: 'flex-start',
               alignItems: 'center',
             }}>
-            <Pressable hitSlop={20} onPress={() => props.logOut()}>
+            <Pressable hitSlop={20} onPress={() => dispatch(logOut())}>
               <Image source={back} />
             </Pressable>
           </View>
@@ -53,7 +59,7 @@ const ReportScreen = props => {
         {/* lista */}
         <FlatList
           keyExtractor={(item, index) => index}
-          data={props.historial}
+          data={historial}
           renderItem={(item, index) => (
             <ItemReport item={item.item} index={item.index} />
           )}

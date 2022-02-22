@@ -1,13 +1,14 @@
-import { connect } from 'react-redux';
-import { actions } from '../../../redux/Auth';
+// import { connect } from 'react-redux';
+// import { actions } from '../../../redux/Auth';
 import LoginScreen from './LoginScreen';
 
-const mstp = state => ({
-    ...state.auth,
-});
+// const mstp = state => ({
+//     ...state.auth,
+// });
 
-const mdtp = {
-	...actions,
-};
+// const mdtp = {
+// 	...actions,
+// };
 
-export default connect(mstp, mdtp)(LoginScreen)
+// export default connect(mstp, mdtp)(LoginScreen)
+export default LoginScreen

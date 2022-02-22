@@ -10,11 +10,17 @@ import {
 import {BKGROUND, BKGROUND2, PRIMARY} from '../../../utils/theme';
 import LoginButton from '../../Layout/buttons/LoginButton';
 import TextInput from '../../Layout/inputs/TextInput';
+// redux
+import { setUserToken, logOuth } from '../../../store/auth';
+import { useSelector, useDispatch } from 'react-redux';
 
 const logo = require('../../../assets/images/logo.png');
 const logo2 = require('../../../assets/images/logo2.png');
 
 const LoginScreen = props => {
+
+  const dispatch = useDispatch()
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -31,7 +37,7 @@ const LoginScreen = props => {
               <View style={{paddingHorizontal: 40, width: '100%'}}>
                 <TextInput placeholder="User" style={{marginBottom: 15}} />
                 <TextInput placeholder="Password" style={{marginBottom: 30}} />
-                <LoginButton title="Login" onPress={() => props.setUserToken()}/>
+                <LoginButton title="Login" onPress={() => dispatch(setUserToken())}/>
               </View>
             </View>
           </View>
